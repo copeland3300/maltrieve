@@ -37,6 +37,7 @@ import magic
 import requests
 from bs4 import BeautifulSoup
 
+import sortFiles
 
 class config(object):
 
@@ -447,6 +448,12 @@ def save_urls(urls, filename='urls.json'):
     with open(filename, 'w') as urlfile:
         json.dump(list(urls), urlfile, indent=2)
 
+def sort_downloads():
+    resp = raw_input("Sort files based on type? [Y/n]")
+    if resp == "" or "y" or "Y":
+        sortFiles.main()
+    else:
+        pass
 
 def main():
     resource.setrlimit(resource.RLIMIT_NOFILE, (2048, 2048))
@@ -507,6 +514,7 @@ def main():
 
     save_urls(past_urls, 'urls.json')
     save_hashes(hashes, 'hashes.json')
+    sort_downloads()
 
 
 if __name__ == "__main__":
